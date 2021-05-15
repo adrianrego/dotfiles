@@ -3,6 +3,7 @@ eslint-config-airbnb
 eslint-config-prettier
 eslint-plugin-prettier
 eslint-plugin-react
+expo-cli
 fixjson
 prettier
 typescript
