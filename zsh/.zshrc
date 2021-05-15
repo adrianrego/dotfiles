@@ -1,6 +1,7 @@
 
 local ZSH_CONF=$HOME/.zsh                      # Define the place I store all my zsh config stuff
 local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history and zcompdump 
+
 # Set important shell variables
    export EDITOR=vim                           # Set default editor
    export WORDCHARS=''                         # This is the oh-my-zsh default, I think I'd like it to be a bit different 
@@ -37,11 +38,11 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    setopt HIST_REDUCE_BLANKS                   # Remove extra blanks from each command line being added to history
 
 # ASDF
-  if [ -f $HOME/.asdf/asdf.sh ]; then
-    source $HOME/.asdf/asdf.sh 
-    # append completions to fpath
-    fpath=(${ASDF_DIR}/completions $fpath)
-  fi
+   if [ -f $HOME/.asdf/asdf.sh ]; then
+      source $HOME/.asdf/asdf.sh 
+      # append completions to fpath
+      fpath=(${ASDF_DIR}/completions $fpath)
+   fi
 
 # ZSH Auto Completion
    # Figure out the short hostname
@@ -66,32 +67,43 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    setopt LIST_ROWS_FIRST                                  # Cycle through menus horizontally instead of vertically
 
 # Bindings
-  bindkey "^a" vi-beginning-of-line
-  bindkey "^e" vi-end-of-line
-  bindkey "^[[1;3C" forward-word
-  bindkey "^[[1;3D" backward-word
+   bindkey "^a" vi-beginning-of-line
+   bindkey "^e" vi-end-of-line
+   bindkey "^[[1;3C" forward-word
+   bindkey "^[[1;3D" backward-word
 
 # Aliases
-  if [ -x "$(command -v lsd)" ]; then
+   if [ -x "$(command -v lsd)" ]; then
       alias ls='lsd'
-  fi
+   fi
 
-  if [ -x "$(command -v nvim)" ]; then
+   if [ -x "$(command -v nvim)" ]; then
       alias vim='nvim'
       export EDITOR=nvim
-  fi 
+   fi 
+
+   if [ -x "$(command -v bat)" ]; then
+      alias cat='bat'
+      export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+      bdiff() {
+          git diff --name-only --diff-filter=d | xargs bat --diff
+      }
+   fi
+
+   alias pip-upgrade="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
 
 # FZF
-  if [ -x "$(command -v rg)" ]; then
+   if [ -x "$(command -v rg)" ]; then
       export FZF_DEFAULT_COMMAND='rg --files --hidden --follow 2>/dev/null'
       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-  fi
+   fi
   
-  if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
-    source /usr/share/fzf/shell/key-bindings.zsh
-  fi
+   if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
+      source /usr/share/fzf/shell/key-bindings.zsh
+   fi
 
 # Prompt
-if [ -f /usr/local/bin/starship ]; then
-  eval "$(starship init zsh)"
-fi
+   if [ -f /usr/local/bin/starship ]; then
+      eval "$(starship init zsh)"
+   fi

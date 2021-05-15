@@ -46,8 +46,11 @@ packages_to_remove=()
 # common packages to install *arrays can be left empty, but don't delete them
 #==============================================================================
 dnf_packages_to_install=(
+    awscli
+    bat
     bzip
     bzip2
+    chromimium-freeworld
     curl
     dnf-plugins-core
     docker-compose
