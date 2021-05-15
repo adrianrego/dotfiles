@@ -1,0 +1,13 @@
+[init]
+	defaultBranch = main
+[user]
+  name = Adrian Rego
+  email = arego320@gmail.com
+	signingkey = 63545724A9F7EF0E
+[push]
+  default = tracking
+[core]
+  excludesfile = ~/.gitignore_global
+  autocrlf = false
+[commit]
+	gpgsign = true

@@ -1,0 +1,12 @@
+{
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "json"
+    ],
+    "json.format.enable": true,
+    "workspace.bottomUpFiletypes": [
+        "python",
+        "javascript"
+    ]
+}
