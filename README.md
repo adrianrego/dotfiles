@@ -10,3 +10,10 @@ GNU Stow managed dotfiles and Fedora setup script.
 2. Setup dotfiles and dev environment
  - Clone this repo
  - Run setup_dev.sh
+
+
+asdf-vm plugins:
+python
+nodejs
+kubectx
+helm

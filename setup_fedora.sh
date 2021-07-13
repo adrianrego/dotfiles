@@ -59,9 +59,11 @@ dnf_packages_to_install=(
     fzf
     gcc
     git
+    gnome-extensions-app
     gnome-tweaks
     htop
     kernel-devel
+    kubernetes-client
     kitty
     libffi-devel
     lsd
@@ -89,7 +91,6 @@ flatpak_packages_to_install=(
     org.darktable.Darktable
     org.fedoraproject.MediaWriter
     org.gimp.GIMP
-    org.gnome.Extensions
     org.gnome.Firmware
     org.gnome.SoundRecorder
     org.inkscape.Inkscape
@@ -155,6 +156,9 @@ dnf install -y terraform packer
 
 echo "${BOLD}Installing Starship prompt...${RESET}"
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+
+# Multimedia codecs
+dnf group upgrade --with-optional Multimedia
 
 cat <<EOL
   =================================================================

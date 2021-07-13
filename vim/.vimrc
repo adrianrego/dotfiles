@@ -77,12 +77,10 @@ if (has("termguicolors"))
 endif
 
 try
-  "let base16colorspace=256
   colorscheme iceberg
-  "let g:airline_theme='base16_default_dark'
 endtry
 
-"set background=dark
+set background=dark
 
 " Mouse
 set mouse=a
@@ -311,5 +309,3 @@ let g:coc_global_extensions = [
 	\ 'coc-tsserver',
 	\ 'coc-yaml'
 \ ]
-
-
