@@ -125,7 +125,7 @@ let NERDTreeRespectWildIgnore=1
 let NERDTreeShowHidden=1
 
 " NerdCommenter
-map <leader>/ :call NERDComment(0,"toggle")<CR>
+map <leader>/ :call nerdcommenter#Comment(0,"toggle")<CR>
 
 " Bubble single lines
 nmap <C-k> [e
