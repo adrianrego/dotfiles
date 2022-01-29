@@ -68,6 +68,7 @@ dnf_packages_to_install=(
     libffi-devel
     lsd
     make
+    moby-engine
     neovim
     openssl-devel
     readline-devel
@@ -86,17 +87,18 @@ dnf_packages_to_install=(
 
 flatpak_packages_to_install=(
     com.bitwarden.desktop
+    com.getpostman.Postman
     com.github.xournalpp.xournalpp
-    io.github.celluloid_player.Celluloid
+    com.visualstudio.code
     org.darktable.Darktable
     org.fedoraproject.MediaWriter
+    org.filezillaproject.Filezilla
     org.gimp.GIMP
-    org.gnome.Firmware
     org.gnome.SoundRecorder
     org.inkscape.Inkscape
-    com.getpostman.Postman
-    org.qgis.qgis)
-
+    org.qgis.qgis
+    org.remmina.Remmina
+    us.zoom.Zoom)
 # >>>>>> end of user settings <<<<<<
 
 #==============================================================================
@@ -141,14 +143,9 @@ echo "${BOLD}Installing flathub packages...${RESET}"
 flatpak install -y flathub "${flathub_packages_to_install[@]}"
 
 echo "${BOLD}Installing docker...${RESET}"
-dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-dnf -y install docker-ce docker-ce-cli containerd.io
-systemctl start docker
-systemctl enable docker.service
-systemctl enable containerd.service
-
 groupadd docker
-usermod -aG docker $SUDO_USER 
+usermod -aG docker $SUDO_USER
+systemctl enable docker
 
 echo "${BOLD}Installing Hashicorp products...${RESET}"
 dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
@@ -158,7 +155,7 @@ echo "${BOLD}Installing Starship prompt...${RESET}"
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 
 # Multimedia codecs
-dnf group upgrade --with-optional Multimedia
+dnf group upgrade --with-optional Multimedia Virtualization
 
 cat <<EOL
   =================================================================

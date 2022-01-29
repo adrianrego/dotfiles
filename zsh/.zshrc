@@ -42,6 +42,7 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
       source $HOME/.asdf/asdf.sh 
       # append completions to fpath
       fpath=(${ASDF_DIR}/completions $fpath)
+      export PATH="$(yarn global bin):$PATH"
    fi
 
 # ZSH Auto Completion
