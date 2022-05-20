@@ -59,37 +59,28 @@ dnf_packages_to_install=(
     fzf
     gcc
     git
-    gnome-extensions-app
-    gnome-tweaks
     htop
-    kernel-devel
     kubernetes-client
     kitty
-    libffi-devel
     lsd
     make
-    moby-engine
     neovim
-    openssl-devel
-    readline-devel
+    nodejs
+    podman
+    podman-docker
     ripgrep
     steam
     stow
-    sqlite
-    sqlite-devel
-    tk-devel
     wget
-    wireguard-tools
     tmux
+    toolbox
     unzip
-    zlib-devel
     zsh)
 
 flatpak_packages_to_install=(
     com.bitwarden.desktop
     com.getpostman.Postman
     com.github.xournalpp.xournalpp
-    com.visualstudio.code
     org.darktable.Darktable
     org.fedoraproject.MediaWriter
     org.filezillaproject.Filezilla
@@ -97,7 +88,6 @@ flatpak_packages_to_install=(
     org.gnome.SoundRecorder
     org.inkscape.Inkscape
     org.qgis.qgis
-    org.remmina.Remmina
     us.zoom.Zoom)
 # >>>>>> end of user settings <<<<<<
 
@@ -142,20 +132,12 @@ dnf -y install "${dnf_packages_to_install[@]}"
 echo "${BOLD}Installing flathub packages...${RESET}"
 flatpak install -y flathub "${flathub_packages_to_install[@]}"
 
-echo "${BOLD}Installing docker...${RESET}"
-groupadd docker
-usermod -aG docker $SUDO_USER
-systemctl enable docker
-
 echo "${BOLD}Installing Hashicorp products...${RESET}"
 dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
 dnf install -y terraform packer
 
 echo "${BOLD}Installing Starship prompt...${RESET}"
 sh -c "$(curl -fsSL https://starship.rs/install.sh)"
-
-# Multimedia codecs
-dnf group upgrade --with-optional Multimedia Virtualization
 
 cat <<EOL
   =================================================================
