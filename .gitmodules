@@ -2,7 +2,3 @@
 	path = .tmux
 	url = https://github.com/gpakosz/.tmux.git
 	branch = master
-[submodule "asdf/.asdf"]
-	path = asdf/.asdf
-	url = https://github.com/asdf-vm/asdf.git
-	branch = v0.8.1

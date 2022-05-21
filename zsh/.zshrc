@@ -104,6 +104,17 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
       source /usr/share/fzf/shell/key-bindings.zsh
    fi
 
+# Node
+  if [ -d $HOME/.local/.npm-global ]; then
+     export PATH=~/.local/.npm-global/bin:$PATH
+  fi
+
+# Python
+  if [ -d $HOME/.local/python/venvs/default ]; then
+     source ~/.local/python/venvs/default/bin/activate
+     export PATH=~/.local/python/venvs/default/bin:$PATH
+  fi
+
 # Prompt
    if [ -f /usr/local/bin/starship ]; then
       eval "$(starship init zsh)"

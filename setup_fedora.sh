@@ -48,17 +48,14 @@ packages_to_remove=()
 dnf_packages_to_install=(
     awscli
     bat
-    bzip
     bzip2
-    chromimium-freeworld
     curl
     dnf-plugins-core
     docker-compose
-    ffmpeg
-    fira-code-fonts
     fzf
     gcc
     git
+    google-chrome
     htop
     kubernetes-client
     kitty
@@ -75,9 +72,10 @@ dnf_packages_to_install=(
     tmux
     toolbox
     unzip
+    util-linux-user
     zsh)
 
-flatpak_packages_to_install=(
+flathub_packages_to_install=(
     com.bitwarden.desktop
     com.getpostman.Postman
     com.github.xournalpp.xournalpp
