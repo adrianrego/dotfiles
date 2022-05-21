@@ -54,11 +54,13 @@ dnf_packages_to_install=(
     docker-compose
     fzf
     gcc
+    gcc-c++
     git
     google-chrome
     htop
     kubernetes-client
     kitty
+    libstdc++-static
     lsd
     make
     neovim
