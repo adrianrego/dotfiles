@@ -62,6 +62,8 @@ packer.startup(function(use)
 		config = get_config("null-ls"),
 	})
 
+	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
+
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
