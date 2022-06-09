@@ -35,8 +35,8 @@ local servers = {
 }
 
 require("nvim-lsp-installer").setup({
-    ensure_installed = servers,
-    automatic_installation = true,
+	ensure_installed = servers,
+	automatic_installation = true,
 })
 
 -- Use a loop to conveniently call 'setup' on multiple servers

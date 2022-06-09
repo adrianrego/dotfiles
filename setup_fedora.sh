@@ -49,6 +49,7 @@ dnf_packages_to_install=(
     awscli
     bat
     bzip2
+    cargo
     curl
     dnf-plugins-core
     docker-compose
@@ -68,6 +69,7 @@ dnf_packages_to_install=(
     podman
     podman-docker
     ripgrep
+    rust
     steam
     stow
     wget

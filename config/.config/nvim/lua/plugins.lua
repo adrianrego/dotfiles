@@ -28,7 +28,6 @@ packer.init({
 	threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
 })
 
-
 packer.startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
@@ -37,22 +36,22 @@ packer.startup(function(use)
 	use({ "shaunsingh/nord.nvim", config = get_config("nord") })
 	use({
 		"nvim-telescope/telescope.nvim",
-		requires = { {"nvim-lua/plenary.nvim"} },
-		config = get_config("telescope")
+		requires = { { "nvim-lua/plenary.nvim" } },
+		config = get_config("telescope"),
 	})
 
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
 	use({
 		"nvim-lualine/lualine.nvim",
-		requires = {"kyazdani42/nvim-web-devicons", opt = true},
-		config = get_config("lualine")
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		config = get_config("lualine"),
 	})
 
 	use({
 		"kyazdani42/nvim-tree.lua",
-		requires = {"kyazdani42/nvim-web-devicons"},
-		config = get_config("nvim-tree")
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = get_config("nvim-tree"),
 	})
 
 	use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
@@ -78,10 +77,9 @@ packer.startup(function(use)
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
-		config = get_config("treesitter")
-  	})
+		config = get_config("treesitter"),
+	})
 
 	use({ "williamboman/nvim-lsp-installer" })
 	use({ "neovim/nvim-lspconfig", after = "nvim-lsp-installer", config = get_config("lsp") })
-
 end)
