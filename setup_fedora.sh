@@ -129,6 +129,10 @@ dnf -y --refresh upgrade
 echo "${BOLD}Installing packages...${RESET}"
 dnf -y install "${dnf_packages_to_install[@]}"
 
+# Codecs
+dnf install gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-openh264 gstreamer1-libav --exclude=gstreamer1-plugins-bad-free-devel
+dnf group upgrade --with-optional Multimedia
+
 echo "${BOLD}Installing flathub packages...${RESET}"
 flatpak install -y flathub "${flathub_packages_to_install[@]}"
 
