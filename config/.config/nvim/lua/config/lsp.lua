@@ -147,3 +147,12 @@ for _, lsp in ipairs(servers) do
 		flags = { debounce_text_changes = 150 },
 	})
 end
+
+-- Global diags options
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true,
+	underline = false,
+	update_in_insert = false,
+	severity_sort = false,
+})

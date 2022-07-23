@@ -93,6 +93,12 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    fi
 
    alias pip-upgrade="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
+   alias sudo="sudo "
+
+# Docker / Podman
+   if [ -S /run/user/$UID/podman/podman.sock ]; then
+      export DOCKER_HOST=unix:///run/user/$UID/podman/podman.sock
+   fi
 
 # FZF
    if [ -x "$(command -v rg)" ]; then
@@ -124,3 +130,5 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    if [ -f /usr/local/bin/starship ]; then
       eval "$(starship init zsh)"
    fi
+
+

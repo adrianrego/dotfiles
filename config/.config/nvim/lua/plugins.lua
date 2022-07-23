@@ -57,6 +57,12 @@ packer.startup(function(use)
 	use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
 
 	use({
+		"folke/trouble.nvim",
+		requires = { "kyazdani42/nvim-web-devicons" },
+		config = get_config("trouble"),
+	})
+
+	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
 		config = get_config("null-ls"),
