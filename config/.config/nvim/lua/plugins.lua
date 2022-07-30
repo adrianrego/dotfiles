@@ -32,6 +32,7 @@ packer.startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 	use("tpope/vim-sensible")
+	use("tpope/vim-unimpaired")
 
 	use({ "shaunsingh/nord.nvim", config = get_config("nord") })
 	use({
