@@ -48,6 +48,7 @@ packages_to_remove=()
 dnf_packages_to_install=(
     awscli
     bat
+    bluez-obexd
     bzip2
     cargo
     curl
@@ -82,6 +83,7 @@ dnf_packages_to_install=(
 flathub_packages_to_install=(
     com.bitwarden.desktop
     com.getpostman.Postman
+    com.github.wwmm.easyeffects
     com.github.xournalpp.xournalpp
     org.darktable.Darktable
     org.fedoraproject.MediaWriter

@@ -14,6 +14,7 @@ vim.g.mapleader = ","
 nmap("<leader>n", ":NvimTreeToggle<cr>")
 nmap("<C-p>", ":Telescope find_files<cr>")
 nmap("<C-f>", ":Telescope live_grep<cr>")
+nmap("<C-e>", ":TroubleToggle document_diagnostics<cr>")
 nmap("<Enter>", ":Telescope buffers<cr>")
 
 vim.api.nvim_create_user_command("Format", function()
