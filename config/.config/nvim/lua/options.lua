@@ -4,6 +4,7 @@ o.backup = false -- creates a backup file
 o.swapfile = false -- enable/disable swap file creation
 o.clipboard = "unnamedplus" -- allows neovim to access the system clipboard
 o.fileencoding = "utf-8" -- the encoding written to a file
+o.number = true -- set numbers
 o.expandtab = true -- convert tabs to spaces
 o.shiftwidth = 2 -- the number of spaces inserted for each indentation
 o.tabstop = 2 -- how many columns a tab counts for
