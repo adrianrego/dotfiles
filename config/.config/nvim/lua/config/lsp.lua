@@ -32,6 +32,7 @@ local servers = {
 	"tsserver",
 	"yamlls",
 	"jsonls",
+  "eslint"
 }
 
 require("nvim-lsp-installer").setup({
@@ -55,7 +56,7 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 		settings = {
 			json = {
-				format = { enabled = false },
+				format = { enabled = true },
 				schemas = {
 					{
 						description = "ESLint config",

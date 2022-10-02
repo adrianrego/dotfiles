@@ -8,7 +8,6 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    export PAGER=less                           # Set default pager
    export LESS="-R"                            # Set the default options for less
    export LANG="en_US.UTF-8"                   # I'm not sure who looks at this, but I know it's good to set in general
-   export TERM=xterm-256color
 
 # Misc
    setopt ZLE                                  # Enable the ZLE line editor, which is default behavior, but to be sure
@@ -78,6 +77,11 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
       alias ls='lsd'
    fi
 
+   if [ -x "$(command -v python3)" ]; then
+      alias python='python3'
+      alias pip='pip3'
+   fi
+
    if [ -x "$(command -v nvim)" ]; then
       alias vim='nvim'
       export EDITOR=nvim
@@ -113,6 +117,11 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
 # Node
   if [ -d $HOME/.local/.npm-global ]; then
      export PATH=~/.local/.npm-global/bin:$PATH
+  fi
+
+# Go
+  if [ -d $HOME/go ]; then
+     export PATH=~/go/bin:$PATH
   fi
 
 # Cargo

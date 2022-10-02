@@ -15,7 +15,7 @@ function vmap(shortcut, command)
 end
 
 vim.g.mapleader = ","
-nmap("<leader>n", ":NvimTreeToggle<cr>")
+nmap("<leader>n", ":Neotree toggle<cr>")
 nmap("<C-p>", ":Telescope find_files<cr>")
 nmap("<C-f>", ":Telescope live_grep<cr>")
 nmap("<C-e>", ":TroubleToggle document_diagnostics<cr>")
@@ -47,3 +47,13 @@ vim.api.nvim_set_keymap("v", "<C-k>", "[egv", { noremap = false, silent = true }
 vim.api.nvim_create_user_command("Format", function()
 	vim.lsp.buf.formatting()
 end, {})
+
+-- Code Actions
+vim.api.nvim_create_user_command("Actions", function()
+	vim.lsp.buf.code_action()
+end, {})
+
+
+
+-- Abbreviations
+vim.cmd("ab ipdb breakpoint()")
