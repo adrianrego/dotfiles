@@ -48,10 +48,13 @@ packages_to_remove=()
 dnf_packages_to_install=(
     awscli
     bat
+    bluez
     bluez-obexd
+    bluez-tools
     bzip2
     cargo
     curl
+    dkms
     dnf-plugins-core
     docker-compose
     fzf
@@ -60,6 +63,8 @@ dnf_packages_to_install=(
     git
     google-chrome
     htop
+    kernel-headers
+    kernel-devel
     kubernetes-client
     kitty
     libstdc++-static
