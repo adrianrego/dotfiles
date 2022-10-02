@@ -33,8 +33,11 @@ packer.startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("tpope/vim-sensible")
 	use("tpope/vim-unimpaired")
+  use("kyazdani42/nvim-web-devicons")
 
 	use({ "shaunsingh/nord.nvim", config = get_config("nord") })
+  use({ "lewis6991/gitsigns.nvim", config = get_config("gitsigns") })
+
 	use({
 		"nvim-telescope/telescope.nvim",
 		requires = { { "nvim-lua/plenary.nvim" } },
@@ -49,11 +52,16 @@ packer.startup(function(use)
 		config = get_config("lualine"),
 	})
 
-	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = { "kyazdani42/nvim-web-devicons" },
-		config = get_config("nvim-tree"),
-	})
+  use({
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v2.x",
+    requires={
+      "nvim-lua/plenary.nvim",
+      "kyazdani42/nvim-web-devicons",
+      "MunifTanjim/nui.nvim"
+    },
+    config = get_config("neo-tree")
+  })
 
 	use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
 

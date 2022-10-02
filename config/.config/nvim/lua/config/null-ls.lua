@@ -1,24 +1,15 @@
 local nls = require("null-ls")
 nls.setup({
 	sources = {
-		nls.builtins.formatting.stylua,
-		nls.builtins.diagnostics.eslint,
+		nls.builtins.code_actions.eslint,
+    nls.builtins.code_actions.gitsigns,
 		nls.builtins.completion.spell,
-		nls.builtins.formatting.prettier.with({
-			extra_args = { "--single-quote", "false" },
-		}),
-		nls.builtins.formatting.terraform_fmt,
+		nls.builtins.diagnostics.eslint,
+		nls.builtins.diagnostics.flake8,
 		nls.builtins.formatting.black,
 		nls.builtins.formatting.isort,
+		nls.builtins.formatting.prettier,
+		nls.builtins.formatting.stylua,
+		nls.builtins.formatting.terraform_fmt,
 	},
-	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
-			-- auto format on save (not asynchronous)
-			local LspFormattingGrp = vim.api.nvim_create_augroup("LspFormattingGrp", { clear = true })
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				command = "lua vim.lsp.buf.formatting_sync()",
-				group = LspFormattingGrp,
-			})
-		end
-	end,
 })
