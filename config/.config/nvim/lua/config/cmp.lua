@@ -1,25 +1,7 @@
 -- Setup nvim-cmp.
 local cmp = require("cmp")
-local lspkind = require("lspkind")
 
 cmp.setup({
-	formatting = {
-		format = lspkind.cmp_format({
-			with_text = false,
-			maxwidth = 50,
-			mode = "symbol",
-			menu = {
-				buffer = "BUF",
-				rg = "RG",
-				nvim_lsp = "LSP",
-				path = "PATH",
-				luasnip = "SNIP",
-				calc = "CALC",
-				spell = "SPELL",
-				emoji = "EMOJI",
-			},
-		}),
-	},
 	experimental = { native_menu = false, ghost_text = false },
 	snippet = {
 		expand = function(args)

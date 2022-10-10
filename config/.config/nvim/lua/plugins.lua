@@ -63,8 +63,6 @@ packer.startup(function(use)
     config = get_config("neo-tree")
   })
 
-	use({ "onsails/lspkind-nvim", requires = { "famiu/bufdelete.nvim" } })
-
 	use({
 		"folke/trouble.nvim",
 		requires = { "kyazdani42/nvim-web-devicons" },
