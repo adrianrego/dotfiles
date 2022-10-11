@@ -45,7 +45,7 @@ vim.api.nvim_set_keymap("v", "<C-k>", "[egv", { noremap = false, silent = true }
 
 -- Formating
 vim.api.nvim_create_user_command("Format", function()
-	vim.lsp.buf.formatting()
+	vim.lsp.buf.format()
 end, {})
 
 -- Code Actions
