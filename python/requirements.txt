@@ -1,5 +1,6 @@
 black
 flake8
-pynvim
-requests
 isort
+pynvim
+reformat-gherkin
+requests

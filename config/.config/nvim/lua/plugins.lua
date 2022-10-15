@@ -31,9 +31,10 @@ packer.init({
 packer.startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
+  use("kyazdani42/nvim-web-devicons")
 	use("tpope/vim-sensible")
 	use("tpope/vim-unimpaired")
-  use("kyazdani42/nvim-web-devicons")
+  use("tpope/vim-cucumber")
 
 	use({ "shaunsingh/nord.nvim", config = get_config("nord") })
   use({ "lewis6991/gitsigns.nvim", config = get_config("gitsigns") })
