@@ -71,6 +71,7 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    bindkey "^e" vi-end-of-line
    bindkey "^[[1;3C" forward-word
    bindkey "^[[1;3D" backward-word
+   bindkey '^r' history-incremental-search-backward
 
 # Aliases
    if [ -x "$(command -v lsd)" ]; then
@@ -110,9 +111,7 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
    fi
 
-   if [ -f /usr/share/fzf/shell/key-bindings.zsh ]; then
-      source /usr/share/fzf/shell/key-bindings.zsh
-   fi
+   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Node
   if [ -d $HOME/.local/.npm-global ]; then
@@ -139,5 +138,6 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    if [ -f /usr/local/bin/starship ]; then
       eval "$(starship init zsh)"
    fi
+
 
 

@@ -16,8 +16,8 @@ end
 
 vim.g.mapleader = ","
 nmap("<leader>n", ":Neotree toggle<cr>")
-nmap("<C-p>", ":Telescope find_files<cr>")
-nmap("<C-f>", ":Telescope live_grep<cr>")
+nmap("<C-p>", [[<cmd>lua require('telescope.builtin').find_files { hidden = true}<CR>]])
+nmap("<C-f>", [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
 nmap("<C-e>", ":TroubleToggle document_diagnostics<cr>")
 nmap("<Enter>", ":Telescope buffers<cr>")
 
