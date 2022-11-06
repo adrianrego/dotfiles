@@ -36,14 +36,6 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    setopt INC_APPEND_HISTORY                   # Add commands to history as they are typed, don't wait until shell exit
    setopt HIST_REDUCE_BLANKS                   # Remove extra blanks from each command line being added to history
 
-# ASDF
-   if [ -f $HOME/.asdf/asdf.sh ]; then
-      source $HOME/.asdf/asdf.sh
-      # append completions to fpath
-      fpath=(${ASDF_DIR}/completions $fpath)
-      export PATH="$(yarn global bin):$PATH"
-   fi
-
 # ZSH Auto Completion
    # Figure out the short hostname
    if [[ "$OSTYPE" = darwin* ]]; then
@@ -72,6 +64,11 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    bindkey "^[[1;3C" forward-word
    bindkey "^[[1;3D" backward-word
    bindkey '^r' history-incremental-search-backward
+
+# Homebrew
+  if [ -d /opt/homebrew ]; then
+     export PATH=/opt/homebrew/bin:$PATH
+  fi
 
 # Aliases
    if [ -x "$(command -v lsd)" ]; then
@@ -135,9 +132,9 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
   fi
 
 # Prompt
-   if [ -f /usr/local/bin/starship ]; then
-      eval "$(starship init zsh)"
-   fi
+  if [ -x "$(command -v starship)" ]; then
+    eval "$(starship init zsh)"
+  fi
 
 
 
