@@ -70,6 +70,8 @@ dnf_packages_to_install=(
     libstdc++-static
     lsd
     make
+    mesa-va-drivers-freeworld
+    mesa-vdpau-drivers-freeworld
     neovim
     nodejs
     podman
