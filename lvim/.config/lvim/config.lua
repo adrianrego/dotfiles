@@ -16,6 +16,12 @@ function vmap(shortcut, command)
 	map("v", shortcut, command)
 end
 
+-- plugins --
+lvim.plugins = {
+  {"tpope/vim-unimpaired"},
+  {"tpope/vim-cucumber"},
+}
+
 -- null-ls
 local nls = require("null-ls")
 local h = require("null-ls.helpers")
@@ -60,8 +66,8 @@ nls.register(gherkin)
 --- Mappings ---
 
 lvim.leader = ","
+lvim.keys.normal_mode["<leader>n"] = ":NvimTreeToggle<CR>"
 
-nmap("<leader>n", ":Neotree toggle<cr>")
 nmap("<C-p>", [[<cmd>lua require('telescope.builtin').find_files { hidden = true}<CR>]])
 nmap("<C-f>", [[<cmd>lua require('telescope.builtin').live_grep()<CR>]])
 nmap("<C-e>", ":TroubleToggle document_diagnostics<cr>")
