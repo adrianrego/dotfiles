@@ -8,6 +8,7 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    export PAGER=less                           # Set default pager
    export LESS="-R"                            # Set the default options for less
    export LANG="en_US.UTF-8"                   # I'm not sure who looks at this, but I know it's good to set in general
+   export GPG_TTY=$(tty)                       # GPG: https://stackoverflow.com/questions/41052538/git-error-gpg-failed-to-sign-data/41054093#41054093
 
 # Misc
    setopt ZLE                                  # Enable the ZLE line editor, which is default behavior, but to be sure
@@ -70,32 +71,6 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
      export PATH=/opt/homebrew/bin:$PATH
   fi
 
-# Aliases
-   if [ -x "$(command -v lsd)" ]; then
-      alias ls='lsd'
-   fi
-
-   if [ -x "$(command -v python3)" ]; then
-      alias python='python3'
-      alias pip='pip3'
-   fi
-
-   if [ -x "$(command -v nvim)" ]; then
-      alias vim='nvim'
-      export EDITOR=nvim
-   fi
-
-   if [ -x "$(command -v bat)" ]; then
-      alias cat='bat'
-      export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-      bdiff() {
-          git diff --name-only --diff-filter=d | xargs bat --diff
-      }
-   fi
-
-   alias pip-upgrade="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
-   alias sudo="sudo "
 
 # Docker / Podman
    if [ -S /run/user/$UID/podman/podman.sock ]; then
@@ -108,7 +83,15 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
       export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
    fi
 
+   if [ -x "$(command -v fd)" ]; then
+      export FZF_DEFAULT_COMMAND="fd . $HOME"
+      export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+      export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+   fi
+
+
    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 
 # Node
   if [ -d $HOME/.local/.npm-global ]; then
@@ -131,10 +114,43 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
      export PATH=~/.local/python/venvs/default/bin:$PATH
   fi
 
+# Local Bin
+  if [ -d $HOME/.local/bin ]; then
+     export PATH=~/.local/bin:$PATH
+  fi
+
+# Aliases
+   if [ -x "$(command -v lsd)" ]; then
+      alias ls='lsd'
+   fi
+
+   if [ -x "$(command -v python3)" ]; then
+      alias python='python3'
+      alias pip='pip3'
+   fi
+
+   if [ -x "$(command -v nvim)" ]; then
+      alias vim='nvim'
+      export EDITOR=nvim
+   fi
+
+   if [ -x "$(command -v lvim)" ]; then
+      alias vim='lvim'
+      export EDITOR=lvim
+   fi
+
+   if [ -x "$(command -v bat)" ]; then
+      alias cat='bat'
+      export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+      bdiff() {
+          git diff --name-only --diff-filter=d | xargs bat --diff
+      }
+   fi
+
+   alias pip-upgrade="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
+   alias sudo="sudo "
 # Prompt
   if [ -x "$(command -v starship)" ]; then
     eval "$(starship init zsh)"
   fi
-
-
-
