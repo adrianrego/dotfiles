@@ -65,6 +65,10 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    bindkey "^[[1;3D" backward-word
    bindkey '^r' history-incremental-search-backward
 
+
+# Local
+  export PATH=~/.local/bin:$PATH
+
 # Homebrew
   if [ -d /opt/homebrew ]; then
      export PATH=/opt/homebrew/bin:$PATH
