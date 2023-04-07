@@ -2,3 +2,6 @@
 	path = .tmux
 	url = https://github.com/gpakosz/.tmux.git
 	branch = master
+[submodule "config/.config/nvim"]
+	path = config/.config/nvim
+	url = https://github.com/AstroNvim/AstroNvim
