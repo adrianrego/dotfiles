@@ -3,3 +3,5 @@ zsh/.zsh/cache/*
 !zsh/.zsh/cache/.gitkeep
 config/.config/nvim/plugin/packer_compiled.lua
 config/.config/htop/*
+config/.config/create-next-app-nodejs/*
+config/.config/nextjs-nodejs/*

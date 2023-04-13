@@ -9,6 +9,8 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
    export LESS="-R"                            # Set the default options for less
    export LANG="en_US.UTF-8"                   # I'm not sure who looks at this, but I know it's good to set in general
    export GPG_TTY=$(tty)                       # GPG: https://stackoverflow.com/questions/41052538/git-error-gpg-failed-to-sign-data/41054093#41054093
+   export LC_CTYPE="en_US.UTF-8"
+   export LC_ALL="en_US.UTF-8"
 
 # Misc
    setopt ZLE                                  # Enable the ZLE line editor, which is default behavior, but to be sure
@@ -75,6 +77,10 @@ local ZSH_CACHE=$ZSH_CONF/cache                # for storing files like history 
      export PATH=/opt/homebrew/bin:$PATH
   fi
 
+# Snap
+  if [ -d /snap/bin ]; then
+     export PATH=/snap/bin:$PATH
+  fi
 
 # Docker / Podman
    if [ -S /run/user/$UID/podman/podman.sock ]; then

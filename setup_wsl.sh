@@ -14,9 +14,19 @@ npm install -g eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-
 
 # Cargo / Rust
 cargo install stylua
+cargo install lsd
+
+# Kubernetes
+sudo snap install kubectl --classic
+
+# Starship
+curl -sS https://starship.rs/install.sh | sh
 
 # Symlink dotfiles
 stow git
 stow tmux
 stow zsh
-stow lvim
+stow config
+
+# Switch to zsh
+chsh -s $(which zsh)
