@@ -10,7 +10,7 @@ python3 -m venv ~/.local/python/venvs/default
 mkdir -p ~/.local/.npm-global
 npm config set prefix '~/.local/.npm-global'
 
-npm install -g eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-prettier eslint-plugin-react expo-cli fixjson prettier typescript yarn
+npm install -g eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-prettier eslint-plugin-react expo-cli fixjson prettier typescript yarn pyright yaml-language-server
 
 # Cargo / Rust
 cargo install stylua
