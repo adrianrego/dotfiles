@@ -1,6 +1,5 @@
 black
-flake8
-isort
 pynvim
 reformat-gherkin
 requests
+ruff
