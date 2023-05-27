@@ -16,9 +16,6 @@ npm install -g pnpm eslint eslint-config-airbnb eslint-config-prettier eslint-pl
 cargo install stylua
 cargo install lsd
 
-# Kubernetes
-sudo snap install kubectl --classic
-
 # Starship
 curl -sS https://starship.rs/install.sh | sh
 

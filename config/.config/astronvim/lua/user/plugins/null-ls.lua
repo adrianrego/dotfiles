@@ -31,6 +31,7 @@ return {
 			nls.builtins.completion.spell,
 			nls.builtins.diagnostics.eslint,
 			nls.builtins.diagnostics.ruff,
+			nls.builtins.formatting.beautysh,
 			nls.builtins.formatting.black,
 			nls.builtins.formatting.ruff,
 			nls.builtins.formatting.fixjson,

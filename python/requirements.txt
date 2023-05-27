@@ -1,4 +1,5 @@
 black
+beautysh
 pynvim
 reformat-gherkin
 requests
