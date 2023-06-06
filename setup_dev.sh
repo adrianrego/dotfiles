@@ -12,9 +12,6 @@ npm config set prefix '~/.local/.npm-global'
 
 npm install -g pnpm eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-prettier eslint-plugin-react expo-cli fixjson prettier typescript yarn yaml-language-server pyright
 
-# Cargo / Rust
-cargo install stylua
-
 # Fonts
 git clone --depth=1 https://github.com/ryanoasis/nerd-fonts ~/.nerd-fonts
 ~/.nerd-fonts/install.sh FiraCode

@@ -1,0 +1,22 @@
+# 'brew tap'
+tap "homebrew/cask"
+
+brew "bat"
+brew "fd"
+brew "fzf"
+brew "helm"
+brew "kubectl"
+brew "kubectx"
+brew "lsd"
+brew "neovim"
+brew "node"
+brew "python3"
+brew "ripgrep"
+brew "starship"
+brew "stow"
+brew "stylua"
+brew "terraform"
+brew "tmux"
+brew "zsh"
+
+cask "kitty"

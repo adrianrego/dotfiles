@@ -1,5 +1,5 @@
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [user]
   name = Adrian Rego
   email = arego320@gmail.com
@@ -10,6 +10,8 @@
   excludesfile = ~/.gitignore_global
   autocrlf = false
 [commit]
-	gpgsign = true
+  gpgsign = true
 [pull]
-	rebase = false
+  rebase = false
+[includeIf "gitdir:~/Code/work/"]
+  path = ~/.gitconfig.work
