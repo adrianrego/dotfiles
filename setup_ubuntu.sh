@@ -2,16 +2,17 @@
 
 apt update
 apt upgrade
-apt install -y awscli \
-    bat \
+apt install -y bat \
     build-essential \
     ca-certificates \
     cargo \
     curl \
+    fd-find \
     fzf \
     git \
     gnupg \
     kitty \
+    libnss3-tools \
     luajit \
     python3-dev \
     python3-pip \
@@ -20,6 +21,7 @@ apt install -y awscli \
     ripgrep \
     stow \
     tmux \
+    unzip \
     zsh \
     wget \
 
@@ -43,3 +45,14 @@ snap install microk8s --classic
 
 # Helm
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+# mkcert
+cd /tmp
+curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+chmod +x mkcert-v*-linux-amd64
+cp mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+
+# aws
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
