@@ -2,7 +2,8 @@
 
 apt update
 apt upgrade
-apt install -y bat \
+apt install -y awscli \
+    bat \
     build-essential \
     ca-certificates \
     cargo \
@@ -10,9 +11,8 @@ apt install -y bat \
     fzf \
     git \
     gnupg \
+    kitty \
     luajit \
-    podman \
-    podman-docker \
     python3-dev \
     python3-pip \
     python3-venv \

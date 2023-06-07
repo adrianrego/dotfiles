@@ -19,6 +19,10 @@ cargo install lsd
 # Starship
 curl -sS https://starship.rs/install.sh | sh
 
+# Fonts
+git clone --depth=1 https://github.com/ryanoasis/nerd-fonts ~/.nerd-fonts
+~/.nerd-fonts/install.sh FiraCode
+
 # Symlink dotfiles
 stow git
 stow tmux
