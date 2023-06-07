@@ -167,9 +167,12 @@ if [ -x "$(command -v batcat)" ]; then
     }
 fi
 
-
 if [ -x "$(command -v fdfind)" ]; then
     alias fd='fdfind'
+
+    export FZF_DEFAULT_COMMAND="fdfind . $HOME"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND="fdfind -t d . $HOME"
 fi
 
 alias pip-upgrade="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
