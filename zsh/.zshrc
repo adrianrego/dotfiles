@@ -181,3 +181,8 @@ alias sudo="sudo "
 if [ -x "$(command -v starship)" ]; then
     eval "$(starship init zsh)"
 fi
+
+# Extras
+if [ -f ~/.zsh.extra ]; then
+    source ~/.zsh.extra
+fi
