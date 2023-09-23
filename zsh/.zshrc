@@ -74,7 +74,7 @@ export PATH=~/.local/bin:$PATH
 
 # Homebrew
 if [ -d /opt/homebrew ]; then
-    export PATH=/opt/homebrew/bin:$PATH
+    export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 fi
 
 # Snap
