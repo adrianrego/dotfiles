@@ -5,5 +5,6 @@ git/.gnupg/*
 config/.config/nvim/plugin/packer_compiled.lua
 config/.config/htop/*
 config/.config/cni/*
+config/.config/pip/*
 config/.config/create-next-app-nodejs/*
 config/.config/nextjs-nodejs/*
