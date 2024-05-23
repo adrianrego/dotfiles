@@ -11,7 +11,14 @@ return {
     opts = function(_, opts)
       -- add more things to the ensure_installed table protecting against community packs modifying it
       opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, {
+        "bashls",
+        "helm_ls",
+        "jsonls",
         "lua_ls",
+        "ruff",
+        "terraformls",
+        "tsserver",
+        "yamlls",
         -- add more arguments for adding more language servers
       })
     end,
