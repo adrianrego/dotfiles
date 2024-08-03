@@ -5,7 +5,7 @@ brew "awscli"
 brew "bat"
 brew "colima" if OS.mac?
 brew "docker" if OS.mac?
-brew "docker-compose" if OS.mac?
+brew "docker-compose" 
 brew "fd"
 brew "fzf"
 brew "helm"
@@ -15,6 +15,7 @@ brew "lsd"
 brew "neovim"
 brew "mkcert"
 brew "node"
+brew "podman" if OS.linux?
 brew "python3"
 brew "reattach-to-user-namespace" if OS.mac?
 brew "ripgrep"
