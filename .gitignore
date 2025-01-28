@@ -8,3 +8,5 @@ config/.config/cni/*
 config/.config/pip/*
 config/.config/create-next-app-nodejs/*
 config/.config/nextjs-nodejs/*
+config/.config/zed/**/*.mdb
+config/.config/zed/**/*.tmp*

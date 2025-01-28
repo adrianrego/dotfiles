@@ -1,4 +1,4 @@
--- Customize Treesitter
+-- Customize Neotree
 
 ---@type LazySpec
 return {

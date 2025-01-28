@@ -78,10 +78,11 @@ return {
         -- disable for .vim files, but it work for another filetypes
         Rule("a", "a", "-vim")
       )
+
+      opts.disable_filetype = { "TelescopePrompt", "spectre_panel", "python" }
     end,
   },
   { "tpope/vim-unimpaired", lazy = false },
   { "tpope/vim-surround", lazy = false },
-  "tpope/vim-cucumber",
   "towolf/vim-helm",
 }
