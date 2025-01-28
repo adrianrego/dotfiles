@@ -7,6 +7,7 @@ brew "colima" if OS.mac?
 brew "docker" if OS.mac?
 brew "docker-compose" 
 brew "fd"
+brew "font-fira-code"
 brew "fzf"
 brew "helm"
 brew "kubectl"
@@ -26,4 +27,4 @@ brew "terraform"
 brew "tmux"
 brew "zsh"
 
-cask "kitty" if OS.mac?
+cask "ghostty" if OS.mac?
