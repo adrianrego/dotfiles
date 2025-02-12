@@ -10,3 +10,5 @@ config/.config/create-next-app-nodejs/*
 config/.config/nextjs-nodejs/*
 config/.config/zed/**/*.mdb
 config/.config/zed/**/*.tmp*
+config/.config/containers
+config/.config/systemd

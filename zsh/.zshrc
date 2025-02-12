@@ -77,6 +77,10 @@ if [ -d /opt/homebrew ]; then
     export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
 fi
 
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+
 # Snap
 if [ -d /snap/bin ]; then
     export PATH=/snap/bin:$PATH

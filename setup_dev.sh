@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+  test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+fi
+
+brew bundle
+
+command -v zsh | sudo tee -a /etc/shells
+
 # Setup default python virtualenv
 mkdir -p ~/.local/python/venvs
 python3 -m venv ~/.local/python/venvs/default
@@ -10,7 +23,7 @@ python3 -m venv ~/.local/python/venvs/default
 mkdir -p ~/.local/.npm-global
 npm config set prefix '~/.local/.npm-global'
 
-npm install -g pnpm eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-prettier eslint-plugin-react expo-cli fixjson prettier typescript yarn yaml-language-server pyright
+npm install -g eslint eslint-config-airbnb eslint-config-prettier fixjson prettier typescript
 
 # Fonts
 git clone --depth=1 https://github.com/ryanoasis/nerd-fonts ~/.nerd-fonts
@@ -24,3 +37,16 @@ stow config
 stow git
 stow tmux
 stow zsh
+
+if [ -d /home/linuxbrew/.linuxbrew ]; then
+  mkdir -p ~/.docker/cli-plugins
+  ln -s $(which docker-compose) ~/.docker/cli-plugins/docker-compose
+fi
+
+if [ -f "/usr/lib/systemd/user/podman.service" ]; then
+  mkdir -p ~/.config/systemd/user/
+  cp /usr/lib/systemd/user/podman.service ~/.config/systemd/user/podman.service
+  cp /usr/lib/systemd/user/podman.socket ~/.config/systemd/user/podman.socket
+
+  systemctl --user enable --now podman.socket
+fi
