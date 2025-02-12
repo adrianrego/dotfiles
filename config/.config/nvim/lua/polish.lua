@@ -25,3 +25,6 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<Plug>(unimpaired-move-up)", { noremap = 
 -- Bubble multiple lines
 vim.api.nvim_set_keymap("v", "<C-j>", "<Plug>(unimpaired-move-selection-down)", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("v", "<C-k>", "<Plug>(unimpaired-move-selection-up)", { noremap = false, silent = true })
+
+-- Debugging
+vim.keymap.set("n", "<Leader>b", function() require("dap").toggle_breakpoint() end)
