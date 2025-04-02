@@ -1,4 +1,5 @@
 beautysh
+debugpy
 pynvim
 reformat-gherkin
 requests

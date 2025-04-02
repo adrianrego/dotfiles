@@ -10,6 +10,7 @@ brew "fd"
 brew "fzf"
 brew "gcc" if OS.linux?
 brew "helm"
+brew "jq"
 brew "kubectl"
 brew "kubectx"
 brew "lsd"
