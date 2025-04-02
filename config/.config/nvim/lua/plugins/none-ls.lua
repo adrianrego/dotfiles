@@ -19,7 +19,6 @@ return {
     opts.sources = require("astrocore").list_insert_unique(opts.sources, {
       -- Set a formatter
       null_ls.builtins.code_actions.gitsigns,
-      require "none-ls.diagnostics.ruff",
       require "none-ls.formatting.beautysh",
       require "none-ls.formatting.ruff",
       require "none-ls.formatting.jq",
