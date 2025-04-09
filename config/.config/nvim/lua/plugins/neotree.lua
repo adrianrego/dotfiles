@@ -14,6 +14,8 @@ return {
           hide_by_name = {},
           never_show = {
             ".pytest_cache",
+            ".ruff_cache",
+            ".DS_Store",
             ".ipython",
             ".gitkeep",
             ".git",
