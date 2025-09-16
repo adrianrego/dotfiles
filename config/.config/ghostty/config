@@ -1,3 +1,21 @@
+shell-integration= zsh
 font-family = "Fira Code"
 font-size = 16
 theme = "nord"
+
+scrollback-limit = 1000000
+
+keybind = ctrl+n=new_window
+
+keybind = ctrl+a>h=goto_split:left
+keybind = ctrl+a>j=goto_split:bottom
+keybind = ctrl+a>k=goto_split:top
+keybind = ctrl+a>l=goto_split:right
+
+keybind = ctrl+a>-=new_split:down
+keybind = ctrl+a>shift+\=new_split:right
+keybind = ctrl+a>f=toggle_split_zoom
+
+keybind = super+r=reload_config
+
+window-save-state = always
