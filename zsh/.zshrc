@@ -69,12 +69,9 @@ bindkey "^[[1;3D" backward-word
 bindkey '^r' history-incremental-search-backward
 
 
-# Local
-export PATH=~/.local/bin:$PATH
-
 # Homebrew
-if [ -d /opt/homebrew ]; then
-    export PATH=/opt/homebrew/bin:/opt/homebrew/sbin:$PATH
+if [ -d /opt/homebrew ] && [ ! -d /opt/workbrew ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 if [ -d /home/linuxbrew/.linuxbrew ]; then
@@ -181,12 +178,13 @@ fi
 
 alias pip-upgrade="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
 alias sudo="sudo "
-# Prompt
-if [ -x "$(command -v starship)" ]; then
-    eval "$(starship init zsh)"
-fi
 
 # Extras
 if [ -f ~/.zsh.extra ]; then
     source ~/.zsh.extra
+fi
+
+# Prompt
+if [ -x "$(command -v starship)" ]; then
+    eval "$(starship init zsh)"
 fi

@@ -12,3 +12,4 @@ config/.config/zed/**/*.mdb
 config/.config/zed/**/*.tmp*
 config/.config/containers
 config/.config/systemd
+config/.config/gh/hosts.yml
