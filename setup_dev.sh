@@ -1,7 +1,12 @@
 #!/bin/bash
+set -euo pipefail
+
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 # Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if ! command -v brew &>/dev/null; then
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 if [ -d /home/linuxbrew/.linuxbrew ]; then
   test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
@@ -23,14 +28,16 @@ python3 -m venv ~/.local/python/venvs/default
 mkdir -p ~/.local/.npm-global
 npm config set prefix '~/.local/.npm-global'
 
-npm install -g eslint eslint-config-airbnb eslint-config-prettier fixjson prettier typescript
+npm install -g fixjson prettier typescript
 
 # Fonts
-git clone --depth=1 https://github.com/ryanoasis/nerd-fonts ~/.nerd-fonts
+if [[ ! -d ~/.nerd-fonts ]]; then
+  git clone --depth=1 https://github.com/ryanoasis/nerd-fonts ~/.nerd-fonts
+fi
 ~/.nerd-fonts/install.sh FiraCode
 
 # Switch to ZSH
-chsh -s $(which zsh)
+sudo usermod -s "$(which zsh)" "$USER"
 
 # Symlink dotfiles
 stow config
