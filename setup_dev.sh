@@ -57,3 +57,16 @@ if [ -f "/usr/lib/systemd/user/podman.service" ]; then
 
   systemctl --user enable --now podman.socket
 fi
+
+# ---------------------------------------------------------------------------
+# GPG setup (manual steps required)
+# ---------------------------------------------------------------------------
+cat <<'EOF'
+
+Setup complete. To enable GPG commit signing:
+
+  chmod 700 ~/.gnupg
+  gpg --import /path/to/private-key.asc
+  gpg --edit-key 63545724A9F7EF0E trust quit  # choose 5 = ultimate
+
+EOF
