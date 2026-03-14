@@ -16,7 +16,7 @@ is_ubuntu_debian() {
 # Keep sudo credentials alive for the duration of the script.
 # Prompts once at the start; a background heartbeat refreshes every 50s.
 sudo_keepalive() {
-  sudo -v
+  sudo true
   (while true; do sudo -n true; sleep 50; done) &
   SUDO_KEEPALIVE_PID=$!
   trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null' EXIT
