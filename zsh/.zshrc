@@ -176,7 +176,11 @@ if [ -x "$(command -v fdfind)" ]; then
     export FZF_ALT_C_COMMAND="fdfind -t d . $HOME"
 fi
 
-alias pip-upgrade="pip freeze | cut -d'=' -f1 | xargs -n1 pip install -U"
+# Start gpg-agent if not already running
+if ! pgrep -u "$USER" gpg-agent &>/dev/null; then
+    gpg-agent --daemon --quiet 2>/dev/null
+fi
+
 alias sudo="sudo "
 
 # Extras

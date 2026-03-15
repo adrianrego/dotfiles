@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 apt update
 apt upgrade -y
-apt install -y build-essential \
+apt install -y \
+    build-essential \
     ca-certificates \
     curl \
     file \

@@ -1,65 +1,114 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
+# ---------------------------------------------------------------------------
 # Homebrew
+# ---------------------------------------------------------------------------
 if ! command -v brew &>/dev/null; then
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+# Activate Homebrew for the rest of this script
 if [ -d /home/linuxbrew/.linuxbrew ]; then
-  test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-  test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  echo "eval \"\$($(brew --prefix)/bin/brew shellenv)\"" >> ~/.bashrc
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [ -d ~/.linuxbrew ]; then
+  eval "$(~/.linuxbrew/bin/brew shellenv)"
 fi
+
+# Append shellenv to ~/.bashrc only once
+BREW_SHELLENV_LINE="eval \"\$($(brew --prefix)/bin/brew shellenv)\""
+grep -qxF "$BREW_SHELLENV_LINE" ~/.bashrc || echo "$BREW_SHELLENV_LINE" >> ~/.bashrc
 
 brew bundle
 
-command -v zsh | sudo tee -a /etc/shells
+# ---------------------------------------------------------------------------
+# ZSH as default shell
+# ---------------------------------------------------------------------------
+ZSH_PATH="$(command -v zsh)"
+grep -qxF "$ZSH_PATH" /etc/shells || echo "$ZSH_PATH" | sudo tee -a /etc/shells
+sudo usermod -s "$ZSH_PATH" "$USER"
 
-# Setup default python virtualenv
+# ---------------------------------------------------------------------------
+# Python virtualenv
+# ---------------------------------------------------------------------------
 mkdir -p ~/.local/python/venvs
 python3 -m venv ~/.local/python/venvs/default
 ~/.local/python/venvs/default/bin/pip install -U pip
 ~/.local/python/venvs/default/bin/pip install -U -r ./python/requirements.txt
 
-# Install global node packages
+# ---------------------------------------------------------------------------
+# Node global packages
+# ---------------------------------------------------------------------------
 mkdir -p ~/.local/.npm-global
 npm config set prefix '~/.local/.npm-global'
-
 npm install -g fixjson prettier typescript
 
-# Fonts
-if [[ ! -d ~/.nerd-fonts ]]; then
-  git clone --depth=1 https://github.com/ryanoasis/nerd-fonts ~/.nerd-fonts
+# ---------------------------------------------------------------------------
+# Nerd Fonts (FiraCode — direct download, avoids cloning the full ~5GB repo)
+# ---------------------------------------------------------------------------
+FONT_DIR="$HOME/.local/share/fonts"
+mkdir -p "$FONT_DIR"
+
+declare -A FIRACODE_FONTS=(
+  ["FiraCodeNerdFont-Regular.ttf"]="FiraCode/Regular/FiraCodeNerdFont-Regular.ttf"
+  ["FiraCodeNerdFont-Bold.ttf"]="FiraCode/Bold/FiraCodeNerdFont-Bold.ttf"
+  ["FiraCodeNerdFont-Light.ttf"]="FiraCode/Light/FiraCodeNerdFont-Light.ttf"
+  ["FiraCodeNerdFontMono-Regular.ttf"]="FiraCode/Regular/FiraCodeNerdFontMono-Regular.ttf"
+)
+
+FONTS_BASE="https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts"
+NEEDS_CACHE_REFRESH=false
+
+for filename in "${!FIRACODE_FONTS[@]}"; do
+  dest="$FONT_DIR/$filename"
+  if [ ! -f "$dest" ]; then
+    echo "[setup] Downloading font: $filename"
+    curl -fLo "$dest" "$FONTS_BASE/${FIRACODE_FONTS[$filename]}"
+    NEEDS_CACHE_REFRESH=true
+  fi
+done
+
+if [ "$NEEDS_CACHE_REFRESH" = true ]; then
+  fc-cache -fv
 fi
-~/.nerd-fonts/install.sh FiraCode
 
-# Switch to ZSH
-sudo usermod -s "$(which zsh)" "$USER"
-
+# ---------------------------------------------------------------------------
 # Symlink dotfiles
+# ---------------------------------------------------------------------------
 stow config
 stow git
 stow tmux
 stow zsh
 
-if [ -d /home/linuxbrew/.linuxbrew ]; then
-  mkdir -p ~/.docker/cli-plugins
-  ln -s $(which docker-compose) ~/.docker/cli-plugins/docker-compose
-fi
-
-if [ -f "/usr/lib/systemd/user/podman.service" ]; then
-  mkdir -p ~/.config/systemd/user/
-  cp /usr/lib/systemd/user/podman.service ~/.config/systemd/user/podman.service
-  cp /usr/lib/systemd/user/podman.socket ~/.config/systemd/user/podman.socket
-
-  systemctl --user enable --now podman.socket
+# ---------------------------------------------------------------------------
+# Docker Compose plugin (Linux only, only if docker-compose is available)
+# ---------------------------------------------------------------------------
+if [ -d /home/linuxbrew/.linuxbrew ] || [ -d ~/.linuxbrew ]; then
+  if command -v docker-compose &>/dev/null; then
+    mkdir -p ~/.docker/cli-plugins
+    ln -sf "$(command -v docker-compose)" ~/.docker/cli-plugins/docker-compose
+  fi
 fi
 
 # ---------------------------------------------------------------------------
-# GPG setup
+# Podman socket (skip gracefully in environments without systemd --user,
+# e.g. Crostini / Chromebook Linux)
+# ---------------------------------------------------------------------------
+if [ -f "/usr/lib/systemd/user/podman.service" ]; then
+  if systemctl --user daemon-reload &>/dev/null 2>&1; then
+    mkdir -p ~/.config/systemd/user/
+    cp /usr/lib/systemd/user/podman.service ~/.config/systemd/user/podman.service
+    cp /usr/lib/systemd/user/podman.socket ~/.config/systemd/user/podman.socket
+    systemctl --user enable --now podman.socket
+  else
+    echo "[setup] Skipping podman socket setup — systemd --user not available in this environment"
+  fi
+fi
+
+# ---------------------------------------------------------------------------
+# GPG permissions
 # ---------------------------------------------------------------------------
 if [ -d ~/.gnupg ]; then
   chmod 700 ~/.gnupg

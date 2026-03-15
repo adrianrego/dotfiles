@@ -1,6 +1,3 @@
-# 'brew tap'
-tap "homebrew/cask"
-
 brew "awscli"
 brew "bat"
 brew "colima" if OS.mac?
@@ -9,6 +6,7 @@ brew "docker-compose"
 brew "fd"
 brew "fzf"
 brew "gcc" if OS.linux?
+brew "gh"
 brew "helm"
 brew "jq"
 brew "kubectl"
@@ -27,5 +25,6 @@ brew "terraform"
 brew "tmux"
 brew "zsh"
 
+cask "claude-code"
 cask "ghostty" if OS.mac?
 cask "font-fira-code" if OS.mac?

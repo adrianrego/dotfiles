@@ -1,5 +1,7 @@
 beautysh
 debugpy
+pandas
+polars
 pynvim
 reformat-gherkin
 requests
