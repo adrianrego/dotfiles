@@ -9,7 +9,6 @@ return {
       ensure_installed = {
         "bashls",
         "helm_ls",
-        "jsonls",
         "lua_ls",
         "ruff",
         "terraformls",

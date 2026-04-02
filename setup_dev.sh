@@ -65,13 +65,6 @@ python3 -m venv ~/.local/python/venvs/default
 ~/.local/python/venvs/default/bin/pip install -U -r ./python/requirements.txt
 
 # ---------------------------------------------------------------------------
-# Node global packages
-# ---------------------------------------------------------------------------
-mkdir -p ~/.local/.npm-global
-npm config set prefix '~/.local/.npm-global'
-npm install -g fixjson prettier typescript
-
-# ---------------------------------------------------------------------------
 # Nerd Fonts (FiraCode — direct download, avoids cloning the full ~5GB repo)
 # ---------------------------------------------------------------------------
 FONT_DIR="$HOME/.local/share/fonts"
