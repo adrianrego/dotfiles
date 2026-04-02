@@ -1,5 +1,4 @@
 -- Customize Conform (formatter) sources
--- Replaces none-ls.nvim for formatting
 
 ---@type LazySpec
 return {
@@ -20,11 +19,10 @@ return {
       default_format_opts = {
         lsp_format = "fallback",
       },
-      format_on_save = function(bufnr)
-        local ignore = { python = true, yaml = true }
-        if ignore[vim.bo[bufnr].filetype] then return end
-        return { timeout_ms = 1000, lsp_format = "fallback" }
-      end,
+      format_on_save = {
+        timeout_ms = 1000,
+        lsp_format = "fallback",
+      },
     },
     init = function()
       vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

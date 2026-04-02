@@ -23,6 +23,7 @@ brew "starship"
 brew "stow"
 brew "stylua"
 brew "terraform"
+brew "tflint"
 brew "tmux"
 brew "zsh"
 

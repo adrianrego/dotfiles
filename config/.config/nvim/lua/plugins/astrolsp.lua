@@ -6,48 +6,31 @@ return {
   "AstroNvim/astrolsp",
   ---@type AstroLSPOpts
   opts = {
-    -- Configuration table of features provided by AstroLSP
     features = {
-      codelens = false, -- enable/disable codelens refresh on start
-      inlay_hints = false, -- enable/disable inlay hints on start
-      semantic_tokens = true, -- enable/disable semantic token highlighting
+      codelens = false,
+      inlay_hints = false,
+      semantic_tokens = true,
     },
-    -- customize lsp formatting options
     formatting = {
-      -- control auto formatting on save
       format_on_save = {
-        enabled = true, -- enable or disable format on save globally
-        allow_filetypes = { -- enable format on save for specified filetypes only
-          -- "go",
-        },
-        ignore_filetypes = { -- disable format on save for specified filetypes
-          "python",
-          "yaml"
-        },
+        enabled = true,
       },
-      disabled = { -- disable formatting capabilities for the listed language servers
-        -- "lua_ls",
-      },
-      timeout_ms = 1000, -- default format timeout
+      timeout_ms = 1000,
     },
-    -- enable servers that you already have installed without mason
-    servers = {
-      -- "pyright"
-    },
-    -- customize language server configuration options passed to `vim.lsp.config`
+    servers = {},
     ---@diagnostic disable: missing-fields
     config = {
-      -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = "off",
+            },
+          },
+        },
+      },
     },
-    -- customize how language servers are attached
-    handlers = {
-      -- v6: use ["*"] key for default handler, receives only server name
-      -- ["*"] = function(server) vim.lsp.enable(server) end,
-
-      -- set a handler to false to disable that language server
-      -- rust_analyzer = false,
-    },
-    -- Configure buffer local auto commands to add when attaching a language server
+    handlers = {},
     autocmds = {
       lsp_codelens_refresh = {
         cond = "textDocument/codeLens",
@@ -60,7 +43,6 @@ return {
         },
       },
     },
-    -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
         gD = {
@@ -77,9 +59,5 @@ return {
         },
       },
     },
-    on_attach = function(client, bufnr)
-      -- this would disable semanticTokensProvider for all clients
-      -- client.server_capabilities.semanticTokensProvider = nil
-    end,
   },
 }
