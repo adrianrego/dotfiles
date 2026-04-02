@@ -1,19 +1,24 @@
 -- Customize Treesitter
+-- v6: treesitter config moved to astrocore opts
 
 ---@type LazySpec
 return {
-  "nvim-treesitter/nvim-treesitter",
+  "AstroNvim/astrocore",
+  ---@type AstroCoreOpts
   opts = {
-    ensure_installed = {
-      "bash",
-      "css",
-      "dockerfile",
-      "hcl",
-      "html",
-      "lua",
-      "python",
-      "vim",
-      -- add more arguments for adding more treesitter parsers
+    treesitter = {
+      ensure_installed = {
+        "bash",
+        "css",
+        "dockerfile",
+        "hcl",
+        "html",
+        "lua",
+        "python",
+        "vim",
+        -- add more arguments for adding more treesitter parsers
+      },
+      highlight = true,
     },
   },
 }
