@@ -19,17 +19,7 @@ return {
     },
     servers = {},
     ---@diagnostic disable: missing-fields
-    config = {
-      pyright = {
-        settings = {
-          python = {
-            analysis = {
-              typeCheckingMode = "off",
-            },
-          },
-        },
-      },
-    },
+    config = {},
     handlers = {},
     autocmds = {
       lsp_codelens_refresh = {

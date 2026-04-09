@@ -13,4 +13,5 @@ config/.config/zed/**/*.tmp*
 config/.config/containers
 config/.config/systemd
 config/.config/gh/hosts.yml
+config/.config/filezilla
 .claude/settings.local.json

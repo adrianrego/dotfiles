@@ -5,12 +5,12 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
+      automatic_installation = false,
       ensure_installed = {
         "bashls",
         "dockerls",
         "helm_ls",
         "lua_ls",
-        "pyright",
         "ruff",
         "terraformls",
         "yamlls",
