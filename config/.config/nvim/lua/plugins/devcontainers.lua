@@ -4,7 +4,12 @@
 ---@type LazySpec
 return {
   {
+    "miversen33/netman.nvim",
+    lazy = false,
+  },
+  {
     "jedrzejboczar/devcontainers.nvim",
+    dependencies = { "miversen33/netman.nvim" },
     opts = {},
     config = function(_, opts)
       require("devcontainers").setup(opts)
