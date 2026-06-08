@@ -8,7 +8,7 @@ return {
     lazy = false,
   },
   {
-    "jedrzejboczar/devcontainers.nvim",
+    "adrianrego/devcontainers.nvim",
     dependencies = { "miversen33/netman.nvim" },
     opts = {},
     config = function(_, opts)
@@ -18,7 +18,7 @@ return {
         cmd = require("devcontainers").lsp_cmd { "pyrefly", "lsp" },
         filetypes = { "python" },
         root_dir = function(bufnr, cb)
-          local root = vim.fs.root(bufnr, { "pyrefly.toml", "pyproject.toml", ".git" })
+          local root = vim.fs.root(bufnr, { ".devcontainer", "devcontainer.json" })
           if root then cb(root) end
         end,
       })

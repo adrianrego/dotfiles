@@ -1,4 +1,5 @@
 debugpy
+ipython
 pandas
 polars
 pynvim

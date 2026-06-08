@@ -16,6 +16,7 @@ brew "neovim"
 brew "mkcert"
 brew "dprint"
 brew "python3"
+brew "uv"
 brew "reattach-to-user-namespace" if OS.mac?
 brew "ripgrep"
 brew "shfmt"
@@ -27,6 +28,6 @@ brew "tflint"
 brew "tmux"
 brew "zsh"
 
-cask "claude-code"
+cask "claude-code@latest"
 cask "ghostty" if OS.mac?
 cask "font-fira-code" if OS.mac?

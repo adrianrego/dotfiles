@@ -52,7 +52,7 @@ fi
 local ZSH_COMPDUMP="$ZSH_CACHE/acdump-${SHORT_HOST}-${ZSH_VERSION}"  #where to store autocomplete data
 
 autoload -U compinit                                    # Autoload auto completion
-compinit -i -d "${ZSH_COMPDUMP}"                        # Init auto completion; tell where to store autocomplete dump
+compinit -u -d "${ZSH_COMPDUMP}"                        # Init auto completion; tell where to store autocomplete dump
 zstyle ':completion:*' menu select                      # Have the menu highlight as we cycle through options
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'     # Case-insensitive (uppercase from lowercase) completion
 setopt COMPLETE_IN_WORD                                 # Allow completion from within a word/phrase
@@ -70,7 +70,9 @@ bindkey '^r' history-incremental-search-backward
 
 
 # Homebrew
-if [ -d /opt/homebrew ] && [ ! -d /opt/workbrew ]; then
+if [ -x /opt/workbrew/bin/brew ]; then
+    eval "$(/opt/workbrew/bin/brew shellenv)"
+elif [ -d /opt/homebrew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 

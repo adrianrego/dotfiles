@@ -54,15 +54,23 @@ brew bundle
 # ---------------------------------------------------------------------------
 ZSH_PATH="$(command -v zsh)"
 grep -qxF "$ZSH_PATH" /etc/shells || echo "$ZSH_PATH" | sudo tee -a /etc/shells
-sudo usermod -s "$ZSH_PATH" "$USER"
+if [ "${SHELL:-}" != "$ZSH_PATH" ]; then
+  if command -v chsh &>/dev/null; then
+    sudo chsh -s "$ZSH_PATH" "$USER"
+  else
+    sudo usermod -s "$ZSH_PATH" "$USER"
+  fi
+fi
 
 # ---------------------------------------------------------------------------
-# Python virtualenv
+# Python virtualenv (uv-managed, pinned to 3.14)
 # ---------------------------------------------------------------------------
-mkdir -p ~/.local/python/venvs
-python3 -m venv ~/.local/python/venvs/default
-~/.local/python/venvs/default/bin/pip install -U pip
-~/.local/python/venvs/default/bin/pip install -U -r ./python/requirements.txt
+DEFAULT_VENV="$HOME/.local/python/venvs/default"
+mkdir -p "$(dirname "$DEFAULT_VENV")"
+if [ ! -x "$DEFAULT_VENV/bin/python" ]; then
+  uv venv --python 3.14 --seed "$DEFAULT_VENV"
+fi
+uv pip install --python "$DEFAULT_VENV/bin/python" -U -r ./python/requirements.txt
 
 # ---------------------------------------------------------------------------
 # Nerd Fonts (FiraCode — direct download, avoids cloning the full ~5GB repo)
