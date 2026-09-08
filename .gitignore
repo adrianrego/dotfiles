@@ -15,4 +15,6 @@ config/.config/containers
 config/.config/systemd
 config/.config/gh/hosts.yml
 config/.config/filezilla
+config/.config/herdr
+config/.config/uv
 .claude/settings.local.json

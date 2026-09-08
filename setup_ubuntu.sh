@@ -11,6 +11,7 @@ apt install -y \
     git \
     gnupg \
     locales \
+    pinentry-gnome3 \
     podman \
     procps \
     wget
