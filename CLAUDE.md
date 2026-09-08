@@ -15,6 +15,7 @@ dotfiles/
 ├── zsh/            # → ~/.zshrc
 ├── colima/         # → ~/.colima/ (Colima VM config)
 ├── eslint/         # → .eslintrc (global ESLint config)
+├── gnupg/          # NOT stowed — gpg-agent.conf template, rendered by setup_dev.sh
 ├── python/         # requirements.txt for default venv
 ├── .tmux/          # git submodule: gpakosz/.tmux framework
 ├── Brewfile        # Homebrew packages (cross-platform with OS conditionals)
@@ -24,7 +25,8 @@ dotfiles/
 
 ## Symlink Management (GNU Stow)
 
-Each top-level directory is a stow package. The directory tree mirrors `$HOME`:
+Most top-level directories are stow packages (exceptions: `python/`, `gnupg/`, `.tmux/`).
+The directory tree inside a package mirrors `$HOME`:
 
 ```bash
 stow config   # config/.config/nvim → ~/.config/nvim, etc.
@@ -71,6 +73,21 @@ After editing `python/requirements.txt`: reinstall via `~/.local/python/venvs/de
 - GPG signing enabled (key: `63545724A9F7EF0E`)
 - Work overrides loaded from `~/.gitconfig.work` when inside `Code/work/` directories
 - Global ignore: `~/.gitignore_global`
+
+### GPG (`gnupg/gpg-agent.conf.tmpl` → `~/.gnupg/gpg-agent.conf`)
+- **Generated, not stowed.** `gpg-agent` requires an *absolute* `pinentry-program`
+  path and does not search `PATH`, so the path differs per machine
+  (`/opt/homebrew/bin` vs `/usr/bin`). `setup_dev.sh` detects an installed
+  pinentry and renders the template; the result is gitignored via `git/.gnupg/*`.
+- Edit the **template**, then re-run `bash setup_dev.sh`. Editing
+  `~/.gnupg/gpg-agent.conf` directly gets overwritten.
+- Candidate order prefers TTY-independent (GUI) pinentries: `pinentry-mac`,
+  `pinentry-gnome3`, `pinentry-qt`, `pinentry-gtk-2`, then `pinentry-curses`/`-tty`.
+  This matters because an agent-driven `git commit` sends a tty prompt to a
+  terminal the user cannot see, so the commit hangs; `pinentry-curses` also fails
+  outright in a small window (`Screen or window too small`).
+- Headless Linux (devcontainers, remote boxes) has no GUI to prompt into — use
+  `allow-preset-passphrase` + `gpg-preset-passphrase` rather than a pinentry.
 
 ### Ghostty (`config/.config/ghostty/config`)
 - Font: FiraCode Nerd Font, 16pt
@@ -138,5 +155,8 @@ stow -R config git tmux zsh
 ## What NOT to Do
 
 - Do not edit `.tmux/.tmux.conf` — it's a git submodule, changes will be lost
+- Do not edit `~/.gnupg/gpg-agent.conf` — generated; edit `gnupg/gpg-agent.conf.tmpl`
+- Do not commit anything under `git/.gnupg/` — the live keyring
+  (`private-keys-v1.d/`, `trustdb.gpg`) physically lives there and is ignored
 - Do not add secrets or tokens to any config file
 - Do not put work-specific config here — use `~/.gitconfig.work` pattern for overrides

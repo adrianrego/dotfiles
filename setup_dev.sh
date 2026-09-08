@@ -135,11 +135,55 @@ if [ -f "/usr/lib/systemd/user/podman.service" ]; then
 fi
 
 # ---------------------------------------------------------------------------
+# GPG agent config (generated — the pinentry path is machine-specific)
+# ---------------------------------------------------------------------------
+# gpg-agent needs an absolute pinentry path and does not search PATH, so this
+# file cannot be stowed verbatim across macOS/Linux. Candidates are ordered
+# most-preferred first; TTY-independent (GUI) pinentries come before the tty
+# ones so that agent-driven `git commit` gets a prompt the user can actually
+# see. See gnupg/gpg-agent.conf.tmpl for the full rationale.
+PINENTRY_CANDIDATES=(
+  pinentry-mac     # macOS GUI
+  pinentry-gnome3  # Linux GUI; auto-falls back to curses when headless
+  pinentry-qt      # Linux GUI (KDE)
+  pinentry-gtk-2   # Linux GUI (older GTK)
+  pinentry-curses  # last resort: needs a visible, adequately sized tty
+  pinentry-tty
+)
+
+PINENTRY_PROGRAM=""
+for candidate in "${PINENTRY_CANDIDATES[@]}"; do
+  if resolved="$(command -v "$candidate" 2>/dev/null)"; then
+    PINENTRY_PROGRAM="$resolved"
+    break
+  fi
+done
+
+if [ -z "$PINENTRY_PROGRAM" ]; then
+  echo "[setup] Warning: no pinentry binary found — leaving ~/.gnupg/gpg-agent.conf alone." >&2
+  echo "[setup]   Install one (brew install pinentry-mac / apt install pinentry-gnome3)," >&2
+  echo "[setup]   then re-run this script." >&2
+else
+  # rm first so we never write *through* a stow symlink back into the repo.
+  rm -f ~/.gnupg/gpg-agent.conf
+  sed "s|@PINENTRY_PROGRAM@|${PINENTRY_PROGRAM}|" \
+    gnupg/gpg-agent.conf.tmpl > ~/.gnupg/gpg-agent.conf
+  echo "[setup] Generated ~/.gnupg/gpg-agent.conf (pinentry: $PINENTRY_PROGRAM)"
+  # Pick up the new config if an agent is already running.
+  gpgconf --kill gpg-agent 2>/dev/null || true
+fi
+
+# ---------------------------------------------------------------------------
 # GPG permissions
 # ---------------------------------------------------------------------------
 if [ -d ~/.gnupg ]; then
+  # Directories need 700 and files 600. A blanket `chmod 600 ~/.gnupg/*` also
+  # hits private-keys-v1.d, stripping its execute bit so gpg can no longer read
+  # the secret keys — so walk by type instead. -L because ~/.gnupg may itself be
+  # a symlink. Sockets are neither -type f nor -type d and are left alone.
   chmod 700 ~/.gnupg
-  chmod 600 ~/.gnupg/* 2>/dev/null || true
+  find -L ~/.gnupg -type d -exec chmod 700 {} + 2>/dev/null || true
+  find -L ~/.gnupg -type f -exec chmod 600 {} + 2>/dev/null || true
 fi
 
 cat <<'EOF'
